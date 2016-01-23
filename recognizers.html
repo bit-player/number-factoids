@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Number Recognizers</title>
+    <meta name="author" content="Brian Hayes">
+
+    <link rel="stylesheet" href="recognizers.css">
+
+  </head>
+
+  <body>
+    <div id="numberbox"> 
+      <div id="header">
+        <h3>Number Factoids</h3>   
+      </div>
+
+      <input id="number-recog-input" type="text" placeholder="">
+      <button id="go-button">Go</button>
+      <label id="input-label" class="gray" for="number-recog-input">Enter a whole number between 1 and 999999999999999.</label>
+      
+<table class="number-properties-table">
+  <tr>
+    <td id="prime-cell" class="prime-factors" colspan="2">Prime factors: </td>
+  </tr>
+  <tr>
+    <td class="property-label">Triangular number</td>
+    <td id="triangular-cell" class="property-marker">?</td>
+  </tr>
+  <tr>
+    <td class="property-label">Fibonacci number</td>
+    <td id="fibonacci-cell" class="property-marker">?</td>
+  </tr>
+  <tr>
+    <td class="property-label">Square number</td>
+    <td id="square-cell" class="property-marker">?</td>
+  </tr>
+  <tr>
+    <td class="property-label">Square-free number</td>
+    <td id="square-free-cell" class="property-marker">?</td>
+  </tr>
+  <tr>
+    <td class="property-label">Factorial number</td>
+    <td id="factorial-cell" class="property-marker">?</td>
+  </tr>
+  <tr>
+    <td class="property-label">Catalan number</td>
+    <td id="catalan-cell" class="property-marker">?</td>
+  </tr>
+</table>
+
+      
+    </div> <!--"numberbox"-->
+    <script src="recognizers.js"></script>
+  </body>
+</html>
