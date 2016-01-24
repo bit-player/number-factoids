@@ -9,7 +9,8 @@ var n = {
   triangular: null,
   factorial: null,
   fibonacci: null,
-  catalan: null
+  catalan: null,
+  duration: null
 };
 
 function clearResults() {
@@ -26,6 +27,7 @@ function clearResults() {
 var input = document.getElementById("number-recog-input");
 var inputLabel = document.getElementById("input-label");
 var goButton = document.getElementById("go-button");
+var clearButton = document.getElementById("clear-button");
 var primeCell = document.getElementById("prime-cell");
 var triangularCell = document.getElementById("triangular-cell");
 var squareCell = document.getElementById("square-cell");
@@ -33,11 +35,11 @@ var squareFreeCell = document.getElementById("square-free-cell");
 var fibonacciCell = document.getElementById("fibonacci-cell");
 var factorialCell = document.getElementById("factorial-cell");
 var catalanCell = document.getElementById("catalan-cell");
+var timerP = document.getElementById("timer");
 
 
 
 function factor(N) {
-//  console.time("factor");
   n.factorlist = [];
   var limit = Math.floor(Math.sqrt(N));
   var d = 2, q = N, r = 0;
@@ -53,7 +55,6 @@ function factor(N) {
   if (q > 1) {
         n.factorlist.push(q);
   }
-//  console.timeEnd("factor");
   return(n.factorlist);
 }
 
@@ -138,23 +139,35 @@ function isCatalan(N) {
 }
 
 function calculemus(ev) {
-  n.value = parseInt(input.value);
-  console.log(n.value);
-  if (n.value > 0 && n.value < 1000000000000000) {
+  var start, finish;
+  
+  if (input.value === "") {
     inputLabel.className = "gray";
-    n.factorlist = factor(n.value);
-    n.factorstring = makeFactorString();
-    n.triangular = isTriangular(n.value);
-    n.square = isSquare(n.value);
-    n.squarefree = isSquareFree();
-    n.fibonacci = isFibo(n.value);
-    n.factorial = isFactorial(n.value);
-    n.catalan = isCatalan(n.value);
-    displayResults();
+    clearResults();    
   }
   else {
-    inputLabel.className = "red";
-    clearResults();
+    n.value = parseInt(input.value);
+    console.log(n.value);
+    if (n.value > 0 && n.value < 1000000000000000) {
+      input.value = n.value;
+      start = (new Date()).getTime();
+      inputLabel.className = "gray";
+      n.factorlist = factor(n.value);
+      n.factorstring = makeFactorString();
+      n.triangular = isTriangular(n.value);
+      n.square = isSquare(n.value);
+      n.squarefree = isSquareFree();
+      n.fibonacci = isFibo(n.value);
+      n.factorial = isFactorial(n.value);
+      n.catalan = isCatalan(n.value);
+      finish = (new Date()).getTime();
+      n.duration = finish - start;
+      displayResults();
+    }
+    else {
+      inputLabel.className = "red";
+      clearResults();
+    }
   }
 }
 
@@ -179,7 +192,12 @@ function displayResults() {
   squareFreeCell.innerHTML = checkmark(n.squarefree);
   factorialCell.innerHTML = checkmark(n.factorial);
   catalanCell.innerHTML = checkmark(n.catalan);
-
+  if (n.duration !== null) {
+    timerP.innerHTML = "Elapsed time: " + n.duration + " ms."
+  }
+  else {
+    timerP.innerHTML = "Elapsed time:"
+  }
 }
 
 function init() {
@@ -190,6 +208,9 @@ function init() {
 
 
 goButton.addEventListener("click", calculemus, false);
+
+clearButton.addEventListener("click", init, false);
+
 
 input.addEventListener("change", calculemus, false);
 
