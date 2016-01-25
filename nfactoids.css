@@ -5,6 +5,9 @@ body {
   color: black;
 }
 
+a {
+  text-decoration: none;
+}
 
 div#numberbox {
   position: relative;
