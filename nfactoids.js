@@ -47,14 +47,18 @@ var timerP = document.getElementById("timer");
 function factor(N) {
   n.factorlist = [];
   var limit = Math.floor(Math.sqrt(N));
-  var d = 2, q = N, r = 0;
+  var d = 3, q = N, r = 0;
+  while ((q % 2) === 0) {
+    n.factorlist.push(2);
+    q = q / 2;
+  }
   while (d <= limit) {
     if ((q % d) === 0) {
       n.factorlist.push(d);
       q = q / d;
     }
     else {
-      d = (d === 2) ? 3 : d + 2;
+      d += 2;
     }
   }
   if (q > 1) {
@@ -173,7 +177,8 @@ function calculemus(ev) {
     n.value = parseInt(input.value);
     if (n.value > 0 && n.value < 1000000000000000) {
       input.value = n.value;
-      start = (new Date()).getTime();
+//      start = (new Date()).getTime();
+      start = performance.now();
       inputLabel.className = "gray";
       n.factorlist = factor(n.value);
       n.factorstring = makeFactorString();
@@ -186,7 +191,7 @@ function calculemus(ev) {
       n.factorial = isFactorial(n.value);
       n.catalan = isCatalan(n.value);
       n.somos = isSomos(n.value);
-      finish = (new Date()).getTime();
+      finish = performance.now();
       n.duration = finish - start;
       displayResults();
     }
@@ -222,7 +227,7 @@ function displayResults() {
   catalanCell.innerHTML = checkmark(n.catalan);
   somosCell.innerHTML = checkmark(n.somos);
   if (n.duration !== null) {
-    timerP.innerHTML = "Elapsed time: " + n.duration + " ms."
+    timerP.innerHTML = "Elapsed time: " + n.duration.toFixed(3) + " ms."
   }
   else {
     timerP.innerHTML = "Elapsed time:"
