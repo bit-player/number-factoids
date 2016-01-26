@@ -1,13 +1,4 @@
 
-body {
-  font-size: 15px;
-  font-family: arial, helvetica, sans-serif;
-  color: black;
-}
-
-a {
-  text-decoration: none;
-}
 
 div#numberbox {
   position: relative;
@@ -16,9 +7,16 @@ div#numberbox {
   width: 90%;
   max-width: 600px;
   background-color: #fffaea;
+  font-size: 15px;
+  font-family: arial, helvetica, sans-serif;
+  color: black;
 }
 
-#header {
+div#numberbox a {
+  text-decoration: none;
+}
+
+div#numberbox #headline {
   display: block;
   position: relative;
   margin: 10px auto;
@@ -37,7 +35,7 @@ div#numberbox > p {
   text-align: left;
 }
 
-.title {
+div#numberbox .title {
   font-weight: 500;
 }
 
@@ -54,6 +52,7 @@ div#input-div > input {
   top: 5px;
   width: 210px;
   height: 25px;
+  font-family: arial, helvetica, sans-serif;
   font-size: 15pt;
   text-align: left;
 }
