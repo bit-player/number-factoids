@@ -203,16 +203,16 @@ function isCatalan(N) {
 // NOTE: This version fails for 32606721084786, the largest Somos-$ number
 // under 10^15.
 
-function isSomos_failure (N) {
-  var next = 1, S = [1, 1, 1, 1];
-  while (next < N) {
-    next = (S[3] * S[1] + S[2] * S[2]) / S[0];
-    S.shift();
-    S.push(next);
-    console.log(next, S)
-  }
-  return next === N;
-}
+//function isSomos_failure (N) {
+//  var next = 1, S = [1, 1, 1, 1];
+//  while (next < N) {
+//    next = (S[3] * S[1] + S[2] * S[2]) / S[0];
+//    S.shift();
+//    S.push(next);
+//    console.log(next, S)
+//  }
+//  return next === N;
+//}
 
   
 // Fix by rearrangement, dividing by S[0] before multiplying and summing.
