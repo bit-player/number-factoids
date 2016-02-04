@@ -4,10 +4,13 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Number Recognizers</title>
+    <title>Number Factoids</title>
     <meta name="author" content="Brian Hayes">
 
     <link rel="stylesheet" href="nfactoids.css">
+    <script type="text/javascript"
+     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 
   </head>
 
@@ -33,16 +36,16 @@
           <td id="prime-cell" class="property-marker">?</td>
         </tr>
         <tr>
-          <td class="property-label"><a href="https://oeis.org/A000290" title="oeis.org/A000290">Square</a> number</td>
-          <td id="square-cell" class="property-marker">?</td>
-        </tr>
-        <tr>
           <td class="property-label"><a href="https://oeis.org/A005117" title="oeis.org/A005117">Square-free</a> number</td>
           <td id="square-free-cell" class="property-marker">?</td>
         </tr>
         <tr>
           <td class="property-label"><a href="https://oeis.org/A048098" title="oeis.org/A048098">Square-root-smooth</a> number</td>
           <td id="smooth-cell" class="property-marker">?</td>
+        </tr>
+        <tr>
+          <td class="property-label"><a href="https://oeis.org/A000290" title="oeis.org/A000290">Square</a> number</td>
+          <td id="square-cell" class="property-marker">?</td>
         </tr>
         <tr>
           <td class="property-label"><a href="https://oeis.org/A000217" title="oeis.org/A000217">Triangular</a> number</td>
@@ -67,8 +70,7 @@
       </table>
       
       <p id="timer" class="gray">Elapsed time: </p>
-
-      
+            
     </div> <!--"numberbox"-->
     <script src="perfnowpolyfill.js"></script>
     <script src="nfactoids.js"></script>

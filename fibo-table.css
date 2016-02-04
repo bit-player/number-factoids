@@ -1,0 +1,38 @@
+
+table#fibo-table {
+  position: relative;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e0e0e0;
+  width: 150px;
+}
+
+table#fibo-table th {
+  font-style: italic;
+  text-align: left;
+}
+
+table#fibo-table tr {
+  height: 18px;
+}
+
+table#fibo-table td {
+  padding: 1px 16px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e0e0e0;
+}
+
+table#fibo-table .correct {
+  background-color: #b5f09d;
+}
+
+table#fibo-table .wrong {
+  background-color: #ff8f7e;
+}
+

@@ -2,7 +2,7 @@
 
 div#numberbox {
   position: relative;
-  margin: 40px auto;
+  margin: 20px auto;
   padding: 10px;
   width: 90%;
   max-width: 600px;
@@ -26,6 +26,7 @@ div#numberbox #headline {
 div#numberbox h3 {
   text-align: center;
   font-size: 20px;
+  margin-top: 0px;
 }
 
 div#numberbox > p {
@@ -33,10 +34,6 @@ div#numberbox > p {
   margin-bottom: 18px;
   line-height: 1.3em;
   text-align: left;
-}
-
-div#numberbox .title {
-  font-weight: 500;
 }
 
 div#input-div {
@@ -78,14 +75,14 @@ button#clear-button {
   top: 10px;
 }
 
-.number-properties-table  {
+div#numberbox table  {
   border-collapse: collapse;
   border-spacing: 0;
   margin: 15px auto;
   width: 80%;
 }
 
-.number-properties-table td {
+div#numberbox table td {
   font-size: 14px;
   padding: 10px 5px;
   border-color: #e0e0e0;
@@ -96,7 +93,7 @@ button#clear-button {
   height: 25px;
 }
 
-td.property-marker {
+div#numberbox table td.property-marker {
   text-align: center;
   font-size: 20px;
   width: 50px;
@@ -120,4 +117,5 @@ p#timer {
 .gray {
   color: #c0c0c0;
 }
+
 

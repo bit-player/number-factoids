@@ -138,20 +138,27 @@ function isSmooth(N) {
 }
 
 
-// T_n is triangular if T_n = 1 + 2 + 3 + ... + n = n(n+1)/2. We can invert that
-// closed-form expression to recognize a triangular number.
-
+// N is triangular if N = 1 + 2 + 3 + ... + k = k(k+1)/2. Solving k^2 + k - 2N == 0
+// for k, we get a discriminate of sqrt(8N + 1). So N is triangular only if 8N + 1
+// is a perfect square.
+  
 function isTriangular(N) {
-  var r = Math.floor(Math.sqrt(2 * N));
-  return r * (r + 1) === 2 * N;
+  return isSquare(8 * N + 1);
 }
 
 
-// How to recognize a Fibonacci number? There's a closed-form formula,
-// but I can't see how to invert it. If you have an accurate enough value
-// of phi, you can step backwards through the series, which is an interesting
-// process. But the simple solution is to run the series forward and check
-// to see if it intersects N.
+// Fibonacci tests. Ira Gessel's trick is so pretty, but it fails
+// when N^2 gets much beyond 10^15.
+  
+function gessel(N) {
+  var s = 5 * N * N;
+  return isSquare(s + 4) || isSquare(s - 4);
+}
+  
+
+
+// So instead we just iterate the sequence until we either hit N (in which
+// case N is Fibonacci) or exceed N (in which case it's not).
 
 function isFibo(N) {
   var a = 0, b = 1, tmp;
@@ -164,8 +171,7 @@ function isFibo(N) {
 }
 
 
-// As with Fibonacci, the closed-form expression is not (readily) invertible.
-// But the recursion is easier to invert -- just divide by each successive 
+// For factorials we divide by each successive 
 // integer starting with 2. If the remainder is ever nonzero, N is not a
 // factorial.
 
@@ -183,10 +189,10 @@ function isFactorial(N) {
 // Recognize Catalan numbers by running the generator until c >= N.
 
 function isCatalan(N) {
-  var c = 1, m = 0;
+  var c = 1, k = 0;
   while (c < N) {
-    c = c * (4 * m + 2) / (m + 2);
-    m += 1;
+    k += 1;
+    c = c * (4 * k - 2) / (k + 1);
   }
   return c === N;
 }
@@ -194,17 +200,31 @@ function isCatalan(N) {
 
 // Likewise with the Somos sequence.
 
-function isSomos(N) {
-  var next;
-  var i = 0;
-  var a = [1, 1, 1, 1];
-  while (a[0] < N) {
-    next = (a[3] * a[1] + a[2] * a[2]) / a[0];
-    a.shift();
-    a.push(next);
-    i += 1;
+// NOTE: This version fails for 32606721084786, the largest Somos-$ number
+// under 10^15.
+
+function isSomos_failure (N) {
+  var next = 1, S = [1, 1, 1, 1];
+  while (next < N) {
+    next = (S[3] * S[1] + S[2] * S[2]) / S[0];
+    S.shift();
+    S.push(next);
+    console.log(next, S)
   }
-  return a[0] === N;
+  return next === N;
+}
+
+  
+// Fix by rearrangement, dividing by S[0] before multiplying and summing.
+  
+function isSomos(N) {
+  var next = 1, S = [1, 1, 1, 1];
+  while (next < N) {
+    next = S[3] * S[1] / S[0] + S[2] * S[2] / S[0];
+    S.shift();
+    S.push(next);
+  }
+  return next === N;
 }
 
 
@@ -250,6 +270,35 @@ function calculemus(ev) {
     }
   }
 }
+
+function surveyProperties(start, end) {
+  var i, count, zeros = [], sevens = [];
+  clearResults();
+  for (i = start; i <= end; i++) {
+    n.value = i;
+    n.factorlist = factor(n.value);
+    count = 0;
+    if (isPrime()) count++;
+    if (isSquare(n.value)) count++;
+    if (isSquareFree()) count++;
+    if (isSmooth(n.value)) count++;
+    if (isTriangular(n.value)) count++;
+    if (isFibo(n.value)) count++;
+    if (isFactorial(n.value)) count++;
+    if (isCatalan(n.value)) count++;
+    if (isSomos(n.value)) count++;
+    if (count === 0) {
+      zeros.push(i);
+    }
+    if (count === 7) {
+      sevens.push(i);
+    }
+  }
+  console.log("zeros", zeros);
+  console.log("sevens", sevens);
+}
+
+
 
 
 // Convert boolean value to a one-character string: green checkmark,
@@ -311,6 +360,7 @@ function init() {
   clearResults();
 }
 
+  
 
 // Call calculemus on either an input change event or a click on the Go button.
 // The Clear button and window.onload both trigger init().
